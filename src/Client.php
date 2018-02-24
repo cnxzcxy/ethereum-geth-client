@@ -86,7 +86,7 @@ class Client
      */
     private function getUrl()
     {
-        return 'http://' . $this->ip . ':' . $this->port;
+        return $this->ip;
     }
 
     /**
@@ -134,6 +134,4 @@ class Client
     {
         return ['Accept' => 'application/json', 'Content-Type' => 'application/json'];
     }
-
-
 }

@@ -63,8 +63,10 @@ class SmartContract
         $fnSignatures = [];
         foreach ($this->interfaceData as $row) {
             $params = [];
-            foreach ($row['inputs'] as $paramInfo) {
-                $params[] = $paramInfo['type'];
+            if (isset($row['inputs'])) {
+                foreach ($row['inputs'] as $paramInfo) {
+                    $params[] = $paramInfo['type'];
+                }
             }
 
             $fnName = (empty($row['name'])) ? 'constructor' : $row['name']; //TODO: необходимо добавить указание констнкутора
@@ -72,7 +74,7 @@ class SmartContract
             $fnSignatures[$row['type']][] = [
                 'fnSignature' => sprintf('%s(%s)', $fnName, join(',', $params)),
                 'stateMutability' => empty($row['stateMutability']) ? null : $row['stateMutability'],
-                'inputs' => $row['inputs'],
+                'inputs' => isset($row['inputs']) ? $row['inputs'] : '',
             ];
         }
 
